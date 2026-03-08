@@ -10,13 +10,13 @@ This repository contains a from-scratch implementation of the Word2vec CBOW mode
 ### 1. Forward Pass
 For a given target word and its surrounding context words:
 
-1. **Projection Layer ($h$):** The hidden state is the average of the input vectors of the context words:
+1. **Projection Layer ($h$):** The hidden state is the average of the input vectors of the context words: 
    $$h = \frac{1}{2C} \sum_{c \in \text{context\_ids}} W_{in}[c]$$
 
 2. **Scores:**
-   * **Positive Score:** Dot product of the target word's output vector and $h$:
+   * **Positive Score:** Dot product of the target word's output vector and $h$: 
      $$\text{score}_{pos} = W_{out}[\text{target}] \cdot h$$
-   * **Negative Scores:** Dot product for each noise-sampled word $j$:
+   * **Negative Scores:** Dot product for each noise-sampled word $j$: 
      $$\text{score}_{neg,j} = W_{out}[\text{neg}_j] \cdot h$$
      
 ### 2. Loss Function
