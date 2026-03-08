@@ -65,7 +65,6 @@ from train import analogy
 results = analogy("dirty", "clean", "rude", vocab, model)
 ```
 
-## Implementation Detalis
 ## 📉 Implementation Details
 
 * **Numerical Stability**: Uses a custom sigmoid function to prevent overflow by handling positive and negative inputs separately.
