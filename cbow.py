@@ -1,38 +1,3 @@
-"""
-CBOW with Negative Sampling — pure NumPy implementation.
-
-Architecture
-============
-Two embedding matrices:
-    W_in  : (vocab_size, embed_dim)  — embeddings for context words
-    W_out : (vocab_size, embed_dim)  — embeddings for target / negative words
-
-Forward pass (for one sample)
-=============================
-    h = (1 / 2C) * Σ  W_in[c]          for c in context_ids   (C = window size)
-    score_pos = W_out[target] · h
-    score_neg = W_out[neg_j]  · h       for each negative j
-
-Loss  (negative sampling objective)
-====================================
-    L = -log σ(score_pos) - Σ_j log σ(-score_neg_j)
-
-    where σ is the sigmoid function.
-
-Gradients (derived analytically)
-================================
-    Let  σ_pos = σ(score_pos),  σ_neg_j = σ(score_neg_j)
-
-    ∂L/∂W_out[target]  = (σ_pos - 1) · h
-    ∂L/∂W_out[neg_j]   = σ_neg_j      · h
-    ∂L/∂h              = (σ_pos - 1) · W_out[target]
-                        + Σ_j σ_neg_j · W_out[neg_j]
-    ∂L/∂W_in[c]        = (1 / 2C) · ∂L/∂h        for each context word c
-
-Parameter update (SGD with optional learning-rate schedule):
-    θ ← θ - lr · ∂L/∂θ
-"""
-
 import numpy as np
 
 
@@ -55,8 +20,8 @@ def sigmoid(x: np.ndarray) -> np.ndarray:
 
 class CBOWModel:
     """
-    Pure NumPy CBOW with negative sampling.
-    Supports mini-batch training with SGD (+ optional linear LR decay).
+    CBOW with negative sampling.
+    Supports mini-batch training with SGD (+ linear LR decay).
     """
 
     def __init__(
@@ -93,7 +58,7 @@ class CBOWModel:
         loss       : scalar   — mean loss over the batch
         """
         B = context_ids.shape[0]
-        num_ctx = context_ids.shape[1]  # = 2 * window
+        # num_ctx = context_ids.shape[1]  # = 2 * window
 
         # h = mean of context embeddings  →  (B, D)
         # W_in[context_ids] → (B, 2*window, D)

@@ -1,7 +1,3 @@
-"""
-Vocabulary builder and text preprocessing for Word2Vec.
-"""
-
 import re
 import numpy as np
 from collections import Counter
@@ -174,13 +170,3 @@ class Vocabulary:
             for doc in documents
         ]
 
-
-# ------------------------------------------------------------------
-# simple tokeniser (kept for convenience / quick experiments)
-# ------------------------------------------------------------------
-
-def tokenise(text: str) -> list[str]:
-    """Lowercase + keep only alphabetic tokens of length >= 2."""
-    text = text.lower()
-    tokens = re.findall(r"[a-z]+", text)
-    return [t for t in tokens if len(t) >= 2]

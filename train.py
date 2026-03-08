@@ -1,8 +1,3 @@
-"""
-Training loop and evaluation helpers for CBOW Word2Vec.
-"""
-
-import time
 import numpy as np
 from tqdm.auto import tqdm
 from cbow import CBOWModel

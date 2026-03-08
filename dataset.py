@@ -1,8 +1,3 @@
-"""
-Dataset generator for CBOW with negative sampling.
-Produces (context_ids, target_id) pairs from tokenised & encoded text.
-"""
-
 import numpy as np
 from vocab import Vocabulary
 
